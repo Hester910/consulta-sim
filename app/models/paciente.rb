@@ -7,7 +7,7 @@ class Paciente < ApplicationRecord
   validates :cpf, presence: {message: 'CPF obrigatório'},
             length: {is: 11, message: 'Precisa ter 11 dígitos'},
             format: {with: /\A\d+\z/, message: 'Deve ter apenas números'}
-  validates :nome, presence: {message: 'Nome é obrigatório'},
+  validates :nomeCompleto, presence: {message: 'Nome é obrigatório'},
             length: {maximum: 100, message:'Máximo 100 caracteres'}
   validates :email, format: {with: URI:: MailTo::EMAIL_REGEXP}
 end
