@@ -1,5 +1,5 @@
 class Endereco < ApplicationRecord
-  belongs_to :Paciente
+  belongs_to :Paciente, :optional => true #adicionei o optional pq dava erro de restrição no endereço
 
   validates :cep, presence: true,  length: {is: 8}
   validates :cidade, presence: true, length: {minimum: 3, too_short: "%{count} Caracteres minimos permitidos",
