@@ -13,8 +13,6 @@ class ConsultaController < ApplicationController
   # GET /consulta/new
   def new
     @consultum = Consultum.new
-    @consultum.build_Paciente
-    @consultum.build_Medico
   end
 
   # GET /consulta/1/edit
@@ -23,7 +21,12 @@ class ConsultaController < ApplicationController
 
   # POST /consulta or /consulta.json
   def create
+    @paciente = Paciente.find(consultum_params[:paciente_id])
+    @medico = Medico.find(consultum_params[:medico_id])
     @consultum = Consultum.new(consultum_params)
+
+    @paciente.consultums << @consultum
+    @medico.consultums << @consultum
 
     respond_to do |format|
       if @consultum.save
@@ -67,6 +70,8 @@ class ConsultaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def consultum_params
-      params.require(:consultum).permit(:data, :horario, :Paciente_id, :Medico_id)
+      params.require(:consultum).permit(:data, :horario, :paciente_id,
+                                        {:paciente_attributes => [:nomeCompleto, :dataDeNascimento, :cpf, :email]}, :medico_id,
+                                        {:medico_attributes => [:nomeCompleto, :cpf, :email, :especialidade, :crm]})
     end
 end
