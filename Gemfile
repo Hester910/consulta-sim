@@ -9,6 +9,10 @@ gem "rails", "~> 7.0.2", "= 7.0.2.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'ffi'
+
+gem 'rspec'
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 
@@ -69,4 +73,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
